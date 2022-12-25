@@ -1,0 +1,16 @@
+FROM amd64/ubuntu:jammy
+
+ENV LANG=C.UTF-8 \
+	LC_ALL=C.UTF-8 \
+	DEBIAN_FRONTEND=noninteractive \
+	DEBCONF_NONINTERACTIVE_SEEN=true
+
+RUN apt-get -q update && \
+	apt-get -qfy dist-upgrade --no-install-recommends && \
+	apt-get -qfy install --no-install-recommends apt-utils && \
+	apt-get -qfy autoremove --purge && apt-get autoclean
+
+RUN apt-get -q update && apt-get -qfy install --no-install-recommends npm && apt-get -qfy autoremove --purge && apt-get autoclean
+RUN apt-get -q update && apt-get -qfy install --no-install-recommends build-essential python3-dev python3-pip && apt-get -qfy autoremove --purge && apt-get autoclean
+RUN npm install -g tree-sitter && npm install -g tree-sitter-cli
+RUN pip3 install twine

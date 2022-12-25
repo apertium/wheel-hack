@@ -1,0 +1,10 @@
+FROM quay.io/pypa/manylinux_2_28_x86_64
+
+RUN yum -y check-update && yum -y upgrade && yum -y install python39-devel python39-pip gcc-c++ epel-release
+RUN yum -y install epel-release
+RUN yum -y check-update && yum -y upgrade && yum -y install patchelf
+RUN python3.9 -m pip install -U pip
+RUN python3.9 -m pip install -U setuptools
+RUN python3.9 -m pip install -U wheel
+RUN python3.9 -m pip install -U auditwheel
+RUN python3.9 -m pip install -U tree_sitter
