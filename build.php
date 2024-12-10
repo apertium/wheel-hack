@@ -40,41 +40,41 @@ echo shell_exec('docker run -i --rm -v '.__DIR__.'/pkgs:/pkgs wheel-tools /pkgs/
 
 echo "\n";
 echo "Building wheel py38 x86_64\n";
-echo shell_exec('cd python && git clean -f -d -x 2>&1');
+echo shell_exec('git clean -f -d -x 2>&1');
 echo shell_exec('docker run -i --rm -v '.__DIR__.'/pkgs:/pkgs wheel-py38-x86_64 /pkgs/tree-sitter-apertium.02-py38.sh 2>&1');
-echo shell_exec('cp -avf python/dist/* ../dist/tree-sitter-apertium/');
+echo shell_exec('cp -avf dist/* ../dist/tree-sitter-apertium/');
 
 echo "\n";
 echo "Building wheel py39 x86_64\n";
-echo shell_exec('cd python && git clean -f -d -x 2>&1');
+echo shell_exec('git clean -f -d -x 2>&1');
 echo shell_exec('docker run -i --rm -v '.__DIR__.'/pkgs:/pkgs wheel-py39-x86_64 /pkgs/tree-sitter-apertium.02-py39.sh 2>&1');
-echo shell_exec('cp -avf python/dist/* ../dist/tree-sitter-apertium/');
+echo shell_exec('cp -avf dist/* ../dist/tree-sitter-apertium/');
 
 echo "\n";
 echo "Building wheel py310 x86_64\n";
-echo shell_exec('cd python && git clean -f -d -x 2>&1');
+echo shell_exec('git clean -f -d -x 2>&1');
 echo shell_exec('docker run -i --rm -v '.__DIR__.'/pkgs:/pkgs wheel-py310-x86_64 /pkgs/tree-sitter-apertium.02-py310.sh 2>&1');
-echo shell_exec('cp -avf python/dist/* ../dist/tree-sitter-apertium/');
+echo shell_exec('cp -avf dist/* ../dist/tree-sitter-apertium/');
 
-echo shell_exec('cd python && git clean -f -d -x 2>&1');
+echo shell_exec('git clean -f -d -x 2>&1');
 
 echo "\n";
 echo "Building wheel py38 aarch64\n";
 echo shell_exec('rsync -avz --delete '.__DIR__.'/pkgs tino@192.168.1.12:/tmp/ 2>&1');
 echo shell_exec('ssh -l tino 192.168.1.12 "/usr/local/bin/docker run -i --rm -e AUDIT_PLATFORM=manylinux2014_aarch64 -v /tmp/pkgs:/pkgs wheel-py38-aarch64 /pkgs/tree-sitter-apertium.02-py38.sh 2>&1" 2>&1');
-echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/python/dist/* ../dist/tree-sitter-apertium/ 2>&1');
+echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/dist/* ../dist/tree-sitter-apertium/ 2>&1');
 
 echo "\n";
 echo "Building wheel py39 aarch64\n";
 echo shell_exec('rsync -avz --delete '.__DIR__.'/pkgs tino@192.168.1.12:/tmp/ 2>&1');
 echo shell_exec('ssh -l tino 192.168.1.12 "/usr/local/bin/docker run -i --rm -e AUDIT_PLATFORM=manylinux2014_aarch64 -v /tmp/pkgs:/pkgs wheel-py39-aarch64 /pkgs/tree-sitter-apertium.02-py39.sh 2>&1" 2>&1');
-echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/python/dist/* ../dist/tree-sitter-apertium/ 2>&1');
+echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/dist/* ../dist/tree-sitter-apertium/ 2>&1');
 
 echo "\n";
 echo "Building wheel py310 aarch64\n";
 echo shell_exec('rsync -avz --delete '.__DIR__.'/pkgs tino@192.168.1.12:/tmp/ 2>&1');
 echo shell_exec('ssh -l tino 192.168.1.12 "/usr/local/bin/docker run -i --rm -e AUDIT_PLATFORM=manylinux2014_aarch64 -v /tmp/pkgs:/pkgs wheel-py310-aarch64 /pkgs/tree-sitter-apertium.02-py310.sh 2>&1" 2>&1');
-echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/python/dist/* ../dist/tree-sitter-apertium/ 2>&1');
+echo shell_exec('rsync -avz tino@192.168.1.12:/tmp/pkgs/tree-sitter-apertium/dist/* ../dist/tree-sitter-apertium/ 2>&1');
 
 $user = escapeshellarg('TWINE_USERNAME='.getenv('TWINE_USERNAME'));
 $pass = escapeshellarg('TWINE_PASSWORD='.getenv('TWINE_PASSWORD'));
